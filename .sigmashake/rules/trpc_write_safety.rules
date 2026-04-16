@@ -6,7 +6,7 @@ rule trpc-block-unsafe-patterns {
   priority 90
   severity error
   DENY write
-  IF path GLOB "**/*" AND content CONTAINS "UNSAFE_trpc_PATTERN"
+  IF path GLOB "**/*" AND content CONTAINS "unstable_concat"
   MESSAGE "Blocked an unsafe pattern in trpc. Use the recommended best practices for 2025/2026."
 }
 
@@ -14,7 +14,7 @@ rule trpc-force-updated-api {
   enabled true
   priority 80
   severity warning
-  ASK write
-  IF path GLOB "**/*" AND content CONTAINS "OLD_trpc_API"
+  LOG write
+  IF path GLOB "**/*" AND content CONTAINS "trpc.useQuery"
   MESSAGE "You are using an outdated API for trpc. Please upgrade to the newer API."
 }
